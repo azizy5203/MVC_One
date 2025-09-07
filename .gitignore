@@ -6,6 +6,7 @@
 .vs/
 /bin/*/**
 /MVC_One/bin
+/MVC_One/obj
 # User-specific files
 *.rsuser
 *.suo
