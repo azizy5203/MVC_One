@@ -1,0 +1,21 @@
+﻿@model List<MVC_One.Models.TaskModel>
+
+@{
+    ViewData["Title"] = "Tasks List";
+
+    var tasksList = Model;
+}
+
+<div class="row border border-danger rounded p-4">
+    @foreach (var task in tasksList)
+    {
+        <div class="col-6 col-md-4 col-xl-3 mb-4">
+            <div class="d-flex flex-column align-items-start gap-3 p-4 bg-light shadow-sm rounded">
+                <span class="px-2 py-1 rounded-pill bg-warning text-white">Status: @task.Status</span>
+                <h4>@task.Name</h4>
+                <span>Progress: @task.Progress</span>
+                <span>Is Late: @task.IsOverdue</span>
+            </div>
+        </div>
+    }
+</div>
