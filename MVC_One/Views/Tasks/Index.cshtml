@@ -6,16 +6,57 @@
     var tasksList = Model;
 }
 
-<div class="row border border-danger rounded p-4">
-    @foreach (var task in tasksList)
-    {
-        <div class="col-6 col-md-4 col-xl-3 mb-4">
-            <div class="d-flex flex-column align-items-start gap-3 p-4 bg-light shadow-sm rounded">
-                <span class="px-2 py-1 rounded-pill bg-warning text-white">Status: @task.Status</span>
-                <h4>@task.Name</h4>
-                <span>Progress: @task.Progress</span>
-                <span>Is Late: @task.IsOverdue</span>
+<div class="d-flex flex-column gap-2">
+    <div class="d-flex justify-content-between">
+        <h1>Tasks List</h1>
+        <button class="btn btn-primary">
+            <a href="Tasks/Create" class="link-light">Add Task</a>
+        </button>
+    </div>
+    <div class="row rounded p-4">
+        @foreach (var task in tasksList)
+        {
+            <div class="col-6 col-md-4 col-xl-3 mb-4">
+                <div class="d-flex flex-column align-items-start gap-3 p-4 bg-light shadow-sm rounded">
+                    <span class="px-3 py-1 rounded-pill text-white status-badge" data-status="@task.Status">@task.Status</span>
+                    <h4 style="max-width:100%;text-overflow:ellipsis; overflow:hidden; white-space:nowrap" title="@task.Name">@task.Name</h4>
+                    <span>Progress: @task.Progress</span>
+                    <span>Is Late: @task.IsOverdue</span>
+                    <div class="ms-auto mt-2 d-flex gap-3">
+                        <a asp-action="Edit" asp-route-id="@task.Id">
+                            <i class="bi bi-pencil-square text-dark"></i>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@task.Id">
+                            <i class="bi bi-trash text-danger"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
+
+<script>
+    const StatusColorMap = {
+        New: "bg-secondary",
+        InProgress: "bg-primary",
+        OnHold: "bg-danger",
+        Completed: "bg-success"
+    };
+    const normalizedStatusNames = {
+        New: "New",
+        InProgress: "In Progress",
+        OnHold: "On Hold",
+        Completed: "Completed",
+    }
+
+
+    document.querySelectorAll(".status-badge").forEach(el => {
+        const status = el.dataset.status;
+        if (StatusColorMap[status]) {
+            el.classList.add(StatusColorMap[status]);
+            el.textContent = normalizedStatusNames[status]
+        }
+    });
+</script>
+

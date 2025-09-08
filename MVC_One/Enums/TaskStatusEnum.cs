@@ -4,7 +4,7 @@
     {
         New = 1,
         InProgress,
-        Pending,
+        OnHold,
         Completed
     }
 }
