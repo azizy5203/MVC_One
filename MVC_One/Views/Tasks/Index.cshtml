@@ -14,25 +14,34 @@
         </button>
     </div>
     <div class="row rounded p-4">
-        @foreach (var task in tasksList)
+        @if (tasksList.Count > 0)
         {
-            <div class="col-6 col-md-4 col-xl-3 mb-4">
-                <div class="d-flex flex-column align-items-start gap-3 p-4 bg-light shadow-sm rounded">
-                    <span class="px-3 py-1 rounded-pill text-white status-badge" data-status="@task.Status">@task.Status</span>
-                    <h4 style="max-width:100%;text-overflow:ellipsis; overflow:hidden; white-space:nowrap" title="@task.Name">@task.Name</h4>
-                    <span>Progress: @task.Progress</span>
-                    <span>Is Late: @task.IsOverdue</span>
-                    <div class="ms-auto mt-2 d-flex gap-3">
-                        <a asp-action="Edit" asp-route-id="@task.Id">
-                            <i class="bi bi-pencil-square text-dark"></i>
-                        </a>
-                        <a asp-action="Delete" asp-route-id="@task.Id">
-                            <i class="bi bi-trash text-danger"></i>
-                        </a>
+            @foreach (var task in tasksList)
+            {
+                <div class="col-6 col-md-4 col-xl-3 mb-4">
+                    <div class="d-flex flex-column align-items-start gap-3 p-4 bg-light shadow-sm rounded">
+                        <span class="px-3 py-1 rounded-pill text-white status-badge" data-status="@task.Status">@task.Status</span>
+                        <h4 style="max-width:100%;text-overflow:ellipsis; overflow:hidden; white-space:nowrap" title="@task.Name">@task.Name</h4>
+                        <span>Progress: @task.Progress</span>
+                        <span>Is Late: @task.IsOverdue</span>
+                        <div class="ms-auto mt-2 d-flex gap-3">
+                            <a asp-action="Edit" asp-route-id="@task.Id">
+                                <i class="bi bi-pencil-square text-dark"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@task.Id">
+                                <i class="bi bi-trash text-danger"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
+        }else{
+         <div class="w-100 h-100 text-center">
+        <h5>No Tasks Available! <a style="font-weight:normal" href="Tasks/Create">add a task</a> </h5>
+
+         </div>   
         }
+        
     </div>
 </div>
 
